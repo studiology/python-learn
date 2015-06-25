@@ -7,7 +7,11 @@ from datetime import datetime
 
 url = 'http://data.gov.au/api/action/datastore_search?resource_id=31eec35e-1de6-4f04-9703-9be1d43d405b'
 
-phjs = json.load(urllib.urlopen(url))
+try:
+    phjs = json.load(urllib.urlopen(url))
+except:
+    print "Failed loading JSON from ", url
+    quit()
 
 for hol in phjs['result']['records']:
     if ('NAT' in hol['Applicable To'] or 'NSW' in hol['Applicable To']):
